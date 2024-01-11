@@ -24,11 +24,12 @@ New genes
 After each generation, there are some places left in the array, so they are fillde with complete new gens.
 
 Classes:
-Point (.py)     : A (x|y)-coordinate pair
-Gen   (.py)     : A "gene" providing random-init, crossover and mutation
-PointList (.py) : Mostly an array of points, but also the fitness-function
-Model (.py)     : The genetic algorihtm
-MainFrame (.py) : A grapical UI
+
+* Point (.py)     : A (x|y)-coordinate pair
+* Gen   (.py)     : A "gene" providing random-init, crossover and mutation
+* PointList (.py) : Mostly an array of points, but also the fitness-function
+* Model (.py)     : The genetic algorihtm
+* MainFrame (.py) : A grapical UI
 
 
 
