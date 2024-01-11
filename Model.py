@@ -8,8 +8,8 @@ import Gen
 import PointList
 
 NR_OF_GENES      = 100
-F_BEHALTEN       = 0.20
-F_CROSSOVER      = 0.40
+F_BEHALTEN       = 0.30
+F_CROSSOVER      = 0.30
 F_MUTATE         = 0.20
 # der rest wird neu erschaffen
 

@@ -4,6 +4,10 @@ import random as rd
 import numpy as np
 import math
 
+## B and C start from -500 to +500
+INIT_BC_RANGE=1000
+
+
 class Gen:
 
 	def __init__(self, *args):
@@ -13,8 +17,8 @@ class Gen:
 			self.c = args[2]
 		if 0 == len(args):
 			self.a = rd.random()
-			self.b = rd.random() * 1000 - 500
-			self.c = rd.random() * 1000 - 500
+			self.b = (rd.random() - 0.5) * INIT_BC_RANGE
+			self.c = (rd.random() - 0.5) * INIT_BC_RANGE
 
 	def getSaturation(self):
 		return self.c
@@ -35,9 +39,9 @@ class Gen:
 			if self.a > 1 :
 				self.a = rd.random()
 		if (rd.random() < 0.5):
-			self.b = self.b + rd.random()* 4 - 2
+			self.b = self.b + rd.random()* 10 - 5
 		if (rd.random() < 0.5):
-			self.c = self.c + rd.random()*4 -2
+			self.c = self.c + rd.random()* 10 - 5
 
 	def crossover(self, other):
 		a = Gen.cross(self.a, other.a)
