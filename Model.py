@@ -98,5 +98,3 @@ class Model:
 			for i in range(0, 10):
 				self.generation = self.generation + 1
 				self.nextGeneration()
-
-

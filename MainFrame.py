@@ -34,19 +34,29 @@ class MainFrame:
 			y1 = self.model.getPointList().f(g.a, g.b, g.c, x)
 			y2 = self.model.getPointList().f(g.a, g.b, g.c, x+1)
 			self.canvas.create_line(x, y1, x+1, y2, fill=colcol, width=widthi)
-			
+
+	def setLabelText(self, newText):
+		self.label.config(text=newText)
+
 	def __init__(self):
 		self.model = Model.Model()
-								
+
 		root = tk.Tk()
 
 		self.canvas = tk.Canvas(root, bg='#ccccff', )
 		self.canvas.pack()
 		self.canvas.bind('<Button>', self.dotHitInCanvas)
 
-		buttonStart = tk.Button(root, text="Next")
+		frame = tk.Frame(root)
+		frame.pack()
+
+		buttonStart = tk.Button(frame, text="Next")
 		buttonStart.pack()
 		buttonStart.bind('<Button>', self.doButtonNextGenHit)
+
+		self.label = tk.Label(frame)
+		self.label.pack()
+		self.setLabelText("a=...")
 
 		root.mainloop()
 
