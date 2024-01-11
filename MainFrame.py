@@ -4,7 +4,6 @@ import tkinter as tk
 import Model
 import Point
 
-
 class MainFrame:
 
 	def dotHitInCanvas(self, event):
@@ -17,6 +16,7 @@ class MainFrame:
 		self.model.nextGenerations()
 		self.drawAllFunctions()
 		self.paintAllPoints()
+		self.setLabelText("saturation = " + str(self.model.getBestGen().getSaturation()))
 
 	def paintAllPoints(self):
 		for p in self.model.getPointList().getPointsArray():
@@ -56,7 +56,7 @@ class MainFrame:
 
 		self.label = tk.Label(frame)
 		self.label.pack()
-		self.setLabelText("a=...")
+		self.setLabelText("saturaton =")
 
 		root.mainloop()
 

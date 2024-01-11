@@ -16,6 +16,8 @@ class Gen:
 			self.b = rd.random() * 1000 - 500
 			self.c = rd.random() * 1000 - 500
 
+	def getSaturation(self):
+		return self.c
 
 	def cross(x1, x2):
 		if (rd.random() < 0.5) :
@@ -57,7 +59,7 @@ def module_test():
 	print("Gen3", g3)
 	g2.mutate()
 	print("Mutiertes g2:", g2)
-		
+
 ## test the Gen Class
 if "__main__" == __name__:
 	module_test()
