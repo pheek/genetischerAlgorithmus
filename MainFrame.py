@@ -26,8 +26,8 @@ class MainFrame:
 	def drawAllFunctions(self):
 		self.canvas.delete("all")
 		for g in self.model.getGeneArray():
-			self.drawFunction(g, '#ccc')
-			self.drawFunction(self.model.getBestGen(), '#0A6', 3)	
+			self.drawFunction(g, '#aaa')
+		self.drawFunction(self.model.getBestGen(), '#0A6', 3)	
 
 	def drawFunction(self, g, colcol, widthi=1):
 		for x in range(800):
@@ -62,4 +62,5 @@ class MainFrame:
 
 
 ## start MainFrame
-MainFrame()
+if "__main__" == __name__:
+	MainFrame()
