@@ -5,7 +5,7 @@ import numpy as np
 import math
 
 ## B and C start from -500 to +500
-INIT_BC_RANGE=1000
+INIT_BC_RANGE=2000
 
 
 class Gen:

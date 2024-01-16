@@ -26,11 +26,11 @@ class PointList:
 			fitness = 1.0/diff
 		return fitness
 
+## module test
+if "__main__" == __name__:
+	g = gen.Gen(0.5, 2, 4)
+	pl = PointList()
+	pl.addPoint(pt.Point(3, 4))
+	pl.addPoint(pt.Point(4, 9))
 
-## test
-#g = gen.Gen(0.5, 2, 4)
-#pl = PointList()
-#pl.addPoint(pt.Point(3, 4))
-#pl.addPoint(pt.Point(4, 9))
-
-#print("Fitness: " , pl.fitnessFunction(g))
+	print("Fitness: " , pl.fitnessFunction(g))
