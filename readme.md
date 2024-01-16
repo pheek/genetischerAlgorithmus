@@ -2,7 +2,7 @@ Genetic Algorithm
 =================
 (genetischer Algorithmus)
 
-![Screenshot]()
+![Screenshot](https://github.com/pheek/genetischerAlgorithmus/blob/main/Screenshot.png)
 
 This algorithm tries to approximate some measured points with a saturation func
 tion.
