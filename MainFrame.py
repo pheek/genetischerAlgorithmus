@@ -29,7 +29,7 @@ class MainFrame:
 	def drawAllFunctions(self):
 		self.canvas.delete("all")
 		for g in self.model.getGeneArray():
-			self.drawFunction(g, '#afa')
+			self.drawFunction(g, '#3f3')
 		self.drawFunction(self.model.getBestGen(), '#0A6', 3)	
 
 	def drawFunction(self, g, colcol, widthi=1):
@@ -46,7 +46,7 @@ class MainFrame:
 
 		root = tk.Tk()
 
-		self.canvas = tk.Canvas(root, bg='#ccccff', width=FRAME_WIDTH, height=FRAME_HEIGHT)
+		self.canvas = tk.Canvas(root, bg='#eeeeee', width=FRAME_WIDTH, height=FRAME_HEIGHT)
 		self.canvas.pack()
 		self.canvas.bind('<Button>', self.dotHitInCanvas)
 

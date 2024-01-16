@@ -23,8 +23,8 @@ class PointList:
 		for pt in self.pointArray:
 			yIst = self.f(gen.a, gen.b, gen.c, pt.x)
 			diff = diff + abs(pt.y - yIst)
-			fitness = 1.0/diff
-		return fitness
+#			fitness = 1.0/diff
+		return 1.0/diff
 
 ## module test
 if "__main__" == __name__:

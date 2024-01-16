@@ -4,9 +4,10 @@ import random as rd
 import numpy as np
 import math
 
-## B and C start from -500 to +500
+## B and C start from -1000 to +1000
 INIT_BC_RANGE=2000
 
+G_PLUS_MINUS_BC=100
 
 class Gen:
 
@@ -39,9 +40,9 @@ class Gen:
 			if self.a > 1 :
 				self.a = rd.random()
 		if (rd.random() < 0.5):
-			self.b = self.b + rd.random()* 10 - 5
+			self.b = self.b + rd.random() * 2 * G_PLUS_MINUS_BC - G_PLUS_MINUS_BC
 		if (rd.random() < 0.5):
-			self.c = self.c + rd.random()* 10 - 5
+			self.c = self.c + rd.random() * 2 * G_PLUS_MINUS_BC - G_PLUS_MINUS_BC
 
 	def crossover(self, other):
 		a = Gen.cross(self.a, other.a)

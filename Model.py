@@ -7,10 +7,11 @@ import math
 import Gen
 import PointList
 
-NR_OF_GENES      = 100
-F_BEHALTEN       = 0.30
-F_CROSSOVER      = 0.30
-F_MUTATE         = 0.20
+NR_OF_GENES             = 100
+F_BEHALTEN              = 0.30
+F_CROSSOVER             = 0.30
+F_MUTATE                = 0.20
+F_GENERATIONS_PER_CLICK = 1
 # der rest wird neu erschaffen
 
 class Model:
@@ -95,6 +96,6 @@ class Model:
 			self.initGenes()
 		else:
 			print("Next generation ", self.generation)
-			for i in range(0, 10):
+			for i in range(0, F_GENERATIONS_PER_CLICK):
 				self.generation = self.generation + 1
 				self.nextGeneration()
