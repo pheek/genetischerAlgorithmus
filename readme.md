@@ -2,6 +2,8 @@ Genetic Algorithm
 =================
 (genetischer Algorithmus)
 
+![Screenshot]()
+
 This algorithm tries to approximate some measured points with a saturation func
 tion.
 
