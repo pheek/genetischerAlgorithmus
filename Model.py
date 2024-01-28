@@ -1,16 +1,22 @@
 #!/usr/bin/python3
 
+##
+# ph. freimann
+# 2024-01-27 Gen-Pool Modell
+#
+
 import random as rd
 import numpy as np
 import math
+import Fitness as fitnClass
 
 import Gen
 import PointList
 
-NR_OF_GENES             = 100
-F_BEHALTEN              = 0.30
-F_CROSSOVER             = 0.30
-F_MUTATE                = 0.20
+NR_OF_GENES             = 200
+F_BEHALTEN              = 0.15
+F_CROSSOVER             = 0.40
+F_MUTATE                = 0.25
 F_GENERATIONS_PER_CLICK = 1
 # der rest wird neu erschaffen
 
@@ -20,6 +26,7 @@ class Model:
 		self.pointList  = PointList.PointList()
 		self.generation = 0
 		self.genes      = []
+		self.fitness    = fitnClass.Fitness()
 
 	def getPointList(self):
 		return self.pointList
@@ -56,14 +63,11 @@ class Model:
 			self.genes.append(gencopy)
 
 	def sortGenesByFitness(self):
-		fitness = []
+		tempFitnessArray = []
 		for g in self.genes:
-			fitness.append(self.pointList.fitnessFunction(g))
-		#print("all fitness berechnent", fitness)
-#		for i in range(len(self.genes)):
-#			print("Fitness for gen: ", self.genes[i], " is " , fitness[i])
-
-		combined_lists          = list(zip(fitness, self.genes))
+			fitnessValue = self.fitness.fitnessFunction(self.pointList, g)
+			tempFitnessArray.append(fitnessValue)
+		combined_lists          = list(zip(tempFitnessArray, self.genes))
 		sorted_combined_lists   = sorted(combined_lists, reverse=True, key=lambda x : x[0])
 		sorted_corresponding_values = [value for _, value in sorted_combined_lists]
 

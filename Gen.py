@@ -1,13 +1,13 @@
 #!/usr/bin/python3
 
+##
+# ph. freimann
+# 2024-01-27 Gen for genetic algorithm
+# a in 0..1 is the base of the exopnetial saturation function
+# b,c are saturation and starting saturation-difference
+
 import random as rd
-import numpy as np
-import math
-
-## B and C start from -1000 to +1000
-INIT_BC_RANGE=2000
-
-G_PLUS_MINUS_BC=100
+#import math
 
 class Gen:
 
@@ -18,11 +18,8 @@ class Gen:
 			self.c = args[2]
 		if 0 == len(args):
 			self.a = rd.random()
-			self.b = (rd.random() - 0.5) * INIT_BC_RANGE
-			self.c = (rd.random() - 0.5) * INIT_BC_RANGE
-
-	def getSaturation(self):
-		return self.c
+			self.b = rd.random()
+			self.c = rd.random()
 
 	def cross(x1, x2):
 		if (rd.random() < 0.5) :
@@ -32,18 +29,22 @@ class Gen:
 				return x2
 		return (x1 + x2) / 2
 
-	def mutate(self):
-		if (rd.random() < 0.5):
-			self.a = self.a + rd.random()*0.01-0.005
-			if self.a < 0 :
-				self.a = rd.random()
-			if self.a > 1 :
-				self.a = rd.random()
-		if (rd.random() < 0.5):
-			self.b = self.b + rd.random() * 2 * G_PLUS_MINUS_BC - G_PLUS_MINUS_BC
-		if (rd.random() < 0.5):
-			self.c = self.c + rd.random() * 2 * G_PLUS_MINUS_BC - G_PLUS_MINUS_BC
+	## A value is in 50% NOT mutated.
+  ## The other 50% are split into
+  ##  a) random
+  ##  b) average of v and random
+	def mutateValue(v):
+		if(rd.random() < 0.5):
+			return v
+		if(rd.random() < 0.2):
+			return rd.random()
+		return (rd.random() + 3*v) / 4
 
+	def mutate(self):
+		self.a = Gen.mutateValue(self.a)
+		self.b = Gen.mutateValue(self.b)
+		self.c = Gen.mutateValue(self.c)
+	
 	def crossover(self, other):
 		a = Gen.cross(self.a, other.a)
 		b = Gen.cross(self.b, other.b)
@@ -56,7 +57,7 @@ class Gen:
 ##  Modultest
 def module_test():
 	g1 = Gen()
-	g2 = Gen(0.5, 4, 5)
+	g2 = Gen(0.5, 0.4, 0.9)
 
 	g3 = g1.crossover(g2)
 	print("Gen1", g1)

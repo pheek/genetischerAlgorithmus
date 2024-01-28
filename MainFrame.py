@@ -1,8 +1,14 @@
 #!/usr/bin/python3
 
+##
+# ph. freimann
+# 2024-01-27 GUI
+#
+
 import tkinter as tk
 import Model
 import Point
+import Fitness as fitnClass
 
 FRAME_WIDTH =1600
 FRAME_HEIGHT= 850
@@ -14,12 +20,15 @@ class MainFrame:
 		p = Point.Point(event.x, event.y)
 		self.model.appendPoint(p)
 		self.paintAllPoints()
-		
+
 	def doButtonNextGenHit(self, event):
 		self.model.nextGenerations()
 		self.drawAllFunctions()
 		self.paintAllPoints()
-		self.setLabelText("saturation = " + str(self.model.getBestGen().getSaturation()))
+		actBestGen = self.model.getBestGen()
+		pointListT = self.model.pointList
+		fitnessValue = self.fitness.fitnessFunction(pointListT, actBestGen)
+		self.setLabelText("fitness = " + str(fitnessValue))
 
 	def paintAllPoints(self):
 		for p in self.model.getPointList().getPointsArray():
@@ -30,12 +39,12 @@ class MainFrame:
 		self.canvas.delete("all")
 		for g in self.model.getGeneArray():
 			self.drawFunction(g, '#3f3')
-		self.drawFunction(self.model.getBestGen(), '#0A6', 3)	
+		self.drawFunction(self.model.getBestGen(), '#0A6', 3)
 
 	def drawFunction(self, g, colcol, widthi=1):
 		for x in range(FRAME_WIDTH):
-			y1 = self.model.getPointList().f(g.a, g.b, g.c, x)
-			y2 = self.model.getPointList().f(g.a, g.b, g.c, x+1)
+			y1 = self.fitness.f(g.a, g.b, g.c, x)
+			y2 = self.fitness.f(g.a, g.b, g.c, x+1)
 			self.canvas.create_line(x, y1, x+1, y2, fill=colcol, width=widthi)
 
 	def setLabelText(self, newText):
@@ -43,6 +52,7 @@ class MainFrame:
 
 	def __init__(self):
 		self.model = Model.Model()
+		self.fitness = fitnClass.Fitness()
 
 		root = tk.Tk()
 
@@ -59,7 +69,7 @@ class MainFrame:
 
 		self.label = tk.Label(frame)
 		self.label.pack()
-		self.setLabelText("saturaton =")
+		self.setLabelText("fitness =")
 
 		root.mainloop()
 

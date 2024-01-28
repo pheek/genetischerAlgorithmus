@@ -1,5 +1,12 @@
 #!/usr/bin/python3
 
+
+##
+# ph. freimann
+# 2024-01-27 List of points including fitting function
+# todo: separate fitness into own class
+#
+
 import Gen as gen
 import Point as pt
 import math
@@ -14,23 +21,17 @@ class PointList:
 
 	def getPointsArray(self):
 		return self.pointArray
-		
-	def f(self, a, b, c, x):
-		return c + b * math.exp(x * math.log(a))
-	
-	def fitnessFunction(self, gen):
-		diff = 0
-		for pt in self.pointArray:
-			yIst = self.f(gen.a, gen.b, gen.c, pt.x)
-			diff = diff + abs(pt.y - yIst)
-#			fitness = 1.0/diff
-		return 1.0/diff
 
+	def __str__(self):
+		dotsStrings = ""
+		for point in self.pointArray:
+			dotsStrings = dotsStrings + " " + point.__str__()
+		return dotsStrings
+		
 ## module test
 if "__main__" == __name__:
-	g = gen.Gen(0.5, 2, 4)
-	pl = PointList()
-	pl.addPoint(pt.Point(3, 4))
-	pl.addPoint(pt.Point(4, 9))
+	pointList = PointList()
+	pointList.addPoint(pt.Point(3, 4))
+	pointList.addPoint(pt.Point(4, 9))
 
-	print("Fitness: " , pl.fitnessFunction(g))
+	print("Points: " , pointList)
