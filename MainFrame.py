@@ -43,8 +43,8 @@ class MainFrame:
 
 	def drawFunction(self, g, colcol, widthi=1):
 		for x in range(FRAME_WIDTH):
-			y1 = self.fitness.f(g.a, g.b, g.c, x)
-			y2 = self.fitness.f(g.a, g.b, g.c, x+1)
+			y1 = self.fitness.saturation(g.a, g.b, g.c, x)
+			y2 = self.fitness.saturation(g.a, g.b, g.c, x+1)
 			self.canvas.create_line(x, y1, x+1, y2, fill=colcol, width=widthi)
 
 	def setLabelText(self, newText):

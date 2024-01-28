@@ -16,13 +16,13 @@ class Fitness:
 	def __init__(self):
 		return
 
-	def f(self, a, b, c, x):
-		return c*3000 + 6000*(b-0.5) * math.exp(x * math.log(a))
+	def saturation(self, a, b, c, x):
+		return c*4000 + 8000*(b-0.5) * math.exp(x * math.log(a))
 
 	def fitnessFunction(self, pl, gen):
 		diffSum = 0
 		for pt in pl.getPointsArray():
-			yIst = self.f(gen.a, gen.b, gen.c, pt.x)
+			yIst = self.saturation(gen.a, gen.b, gen.c, pt.x)
 			diffSum = diffSum + abs(pt.y - yIst)
 		diff = 1.0/diffSum
 		return diff
