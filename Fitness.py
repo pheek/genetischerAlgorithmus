@@ -13,19 +13,22 @@ import PointList
 
 A_MIN = 0.00001
 A_MAX = 1.0
-B_MIN = -2000
-B_MAX = 4000
+B_MIN = -4000
+B_MAX = 6000
 C_MIN = 0
-C_MAX = 2000
+C_MAX = 1200
 
 class Fitness:
 
 	def __init__(self):
 		return
 
+	# all gene values are between 0.0 and 1.0, so
+  # they are stretched between min and max.
 	def stretch(v, min, max):
 		a= max-min
 		return a*v+min
+
 	
 	def saturation(self, a, b, c, x):
 		AA = Fitness.stretch(a, A_MIN, A_MAX)
