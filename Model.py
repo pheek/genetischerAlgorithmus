@@ -13,10 +13,10 @@ import Fitness as fitnClass
 import Gen
 import PointList
 
-NR_OF_GENES             = 100
-F_BEHALTEN              = 0.30   # 30 % keep
-F_CROSSOVER             = 0.40   # 40 % crossover
-F_MUTATE                = 0.25   # 25 % mutation, the rest are random new genes
+NR_OF_GENES             = 300
+F_BEHALTEN              = 0.10   # 10 % keep
+F_CROSSOVER             = 0.20   # 20 % crossover
+F_MUTATE                = 0.50   # 50 % mutation, the rest are random new genes
 F_GENERATIONS_PER_CLICK = 1
 # der rest wird neu erschaffen
 
@@ -62,8 +62,8 @@ class Model:
 			modifiedPosition = anzahl - modifiedPosition
 			if modifiedPosition < 0:
 				modifiedPosition = 0
-			if modifiedPosition >= anzahl:
-				modifiedPosition = anzahl -1
+			if modifiedPosition >= len(self.genes):
+				modifiedPosition = len(self.genes)-1
 			gen = self.genes[modifiedPosition]
 			gencopy = Gen.Gen(gen.a, gen.b, gen.c)
 			gencopy.mutate()
