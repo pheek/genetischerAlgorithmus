@@ -14,9 +14,9 @@ import Gen
 import PointList
 
 NR_OF_GENES             = 200
-F_BEHALTEN              = 0.15
+F_BEHALTEN              = 0.10
 F_CROSSOVER             = 0.40
-F_MUTATE                = 0.25
+F_MUTATE                = 0.46
 F_GENERATIONS_PER_CLICK = 1
 # der rest wird neu erschaffen
 
