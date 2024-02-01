@@ -35,17 +35,29 @@ class MainFrame:
 			coord = p.x-3, p.y-3, p.x+3, p.y+3
 			self.canvas.create_oval(coord, fill='yellow', width=1)
 
+	def drawFunctionSaturation(self, g, colcol, widthi=1):
+		for x in range(FRAME_WIDTH):
+			y1 = self.fitness.saturationValue(g.a, g.b, g.c, x)
+			y2 = self.fitness.saturationValue(g.a, g.b, g.c, x+1)
+			self.canvas.create_line(x, y1, x+1, y2, fill=colcol, width=widthi)
+
+	def drawFunctionCircle(self, g, colcol, widthi=1):
+		## TODO: Draw Circle
+		self.drawFunctionSaturation(g, colcol, widthi)
+
+
 	def drawAllFunctions(self):
 		self.canvas.delete("all")
 		for g in self.model.getGeneArray():
-			self.drawFunction(g, '#3f3')
-		self.drawFunction(self.model.getBestGen(), '#0A6', 3)
+			if g.type < 0.5:
+				self.drawFunctionCircle(g, '#3f3')
+			else:
+				self.drawFunctionSaturation(g, '#3f3')
+		if g.type < 0.5:
+			self.drawFunctionCircle(self.model.getBestGen(), '#0A6', 3)
+		else:
+			self.drawFunctionSaturation(self.model.getBestGen(), '#0A6', 3)
 
-	def drawFunction(self, g, colcol, widthi=1):
-		for x in range(FRAME_WIDTH):
-			y1 = self.fitness.saturation(g.a, g.b, g.c, x)
-			y2 = self.fitness.saturation(g.a, g.b, g.c, x+1)
-			self.canvas.create_line(x, y1, x+1, y2, fill=colcol, width=widthi)
 
 	def setLabelText(self, newText):
 		self.label.config(text=newText)

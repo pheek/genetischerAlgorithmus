@@ -12,6 +12,7 @@ import random as rd
 class Gen:
 
 	def __init__(self, *args):
+		self.type = rd.random()
 		if 3 == len(args):
 			self.a = args[0]
 			self.b = args[1]
@@ -20,7 +21,7 @@ class Gen:
 			self.a = rd.random()
 			self.b = rd.random()
 			self.c = rd.random()
-
+ 
 	def cross(x1, x2):
 		if rd.random() < 0.4:
 			return x1
@@ -39,18 +40,26 @@ class Gen:
 		return (rd.random() + 8*v) / 9
 
 	def mutate(self):
-		self.a = Gen.mutateValue(self.a)
-		self.b = Gen.mutateValue(self.b)
-		self.c = Gen.mutateValue(self.c)
-	
+		self.type = Gen.mutateValue(self.type)
+		self.a    = Gen.mutateValue(self.a)
+		self.b    = Gen.mutateValue(self.b)
+		self.c    = Gen.mutateValue(self.c)
+		
 	def crossover(self, other):
-		a = Gen.cross(self.a, other.a)
-		b = Gen.cross(self.b, other.b)
-		c = Gen.cross(self.c, other.c)
-		return Gen(a, b, c)
+		newGen = Gen()
+		newGen.type = Gen.cross(self.type, other.type)
+		newGen.a    = Gen.cross(self.a   , other.a)
+		newGen.b    = Gen.cross(self.b   , other.b)
+		newGen.c    = Gen.cross(self.c   , other.c)
+		return newGen
+		
 
 	def __str__(self):
-		return "(a={0}, b={1}, c={2})".format(self.a, self.b, self.c)
+		if(self.type < 0.5):
+			tName = "Circle"
+		else:
+			tName = "Saturation"
+		return "(type={0} a={1}, b={2}, c={3})".format(tName, self.a, self.b, self.c)
 
 ##  Modultest
 def module_test():

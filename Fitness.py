@@ -30,20 +30,32 @@ class Fitness:
 		return a*v+min
 
 	
-	def saturation(self, a, b, c, x):
+	def saturationValue(self, a, b, c, x):
 		AA = Fitness.stretch(a, A_MIN, A_MAX)
 		BB = Fitness.stretch(b, B_MIN, B_MAX)
 		CC = Fitness.stretch(c, C_MIN, C_MAX)
 		
 		return CC + BB * math.exp(x * math.log(AA))
 
-	def fitnessFunction(self, pl, gen):
+
+	def fitnessFunctionCircle(self, pl, gen):
+		## TODO Fitness for cicle
+		return self.fitnessFunctionSaturation(pl, gen)
+	
+	def fitnessFunctionSaturation(self, pl, gen):
 		diffSum = 0
 		for pt in pl.getPointsArray():
-			yIst = self.saturation(gen.a, gen.b, gen.c, pt.x)
+			yIst = self.saturationValue(gen.a, gen.b, gen.c, pt.x)
 			diffSum = diffSum + abs(pt.y - yIst)
 		diff = 1.0/diffSum
 		return diff
+
+	def fitnessFunction(self, pl, gen):
+		if(gen.type < 0.5):
+			return self.fitnessFunctionCircle(pl, gen)
+		else:
+			return self.fitnessFunctionSaturation(pl, gen)
+
 
 ## module test
 if "__main__" == __name__:
