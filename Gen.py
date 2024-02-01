@@ -22,23 +22,21 @@ class Gen:
 			self.c = rd.random()
 
 	def cross(x1, x2):
-		if (rd.random() < 0.5) :
-			if (rd.random() < 0.5):
-				return x1
-			else:
-				return x2
-		return (x1 + x2) / 2
+		if rd.random() < 0.4:
+			return x1
+		if rd.random() < 0.24:
+		  return x2
+		return (x1 + rd.random()*(x2-x1))
 
-	## A value is in 50% NOT mutated.
-  ## The other 50% are split into
-  ##  a) random
-  ##  b) average of v and random
+	## 40 % are not mutated
+  ##  6 % (10 % of the remaining 60%) are completly random
+  ## the rest is near the old value, but mutated
 	def mutateValue(v):
-		if(rd.random() < 0.5):
+		if(rd.random() < 0.4):
 			return v
-		if(rd.random() < 0.2):
+		if(rd.random() < 0.1):
 			return rd.random()
-		return (rd.random() + 3*v) / 4
+		return (rd.random() + 8*v) / 9
 
 	def mutate(self):
 		self.a = Gen.mutateValue(self.a)

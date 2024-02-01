@@ -13,10 +13,12 @@ import Fitness as fitnClass
 import Gen
 import PointList
 
-NR_OF_GENES             = 200
-F_BEHALTEN              = 0.10
-F_CROSSOVER             = 0.40
-F_MUTATE                = 0.46
+
+NR_OF_GENES             = 300
+F_BEHALTEN              = 0.10   # 10 % keep
+F_CROSSOVER             = 0.20   # 20 % crossover
+F_MUTATE                = 0.50   # 50 % mutation, the rest are random new genes
+
 F_GENERATIONS_PER_CLICK = 1
 # der rest wird neu erschaffen
 
@@ -56,8 +58,15 @@ class Model:
 	def mutateSome(self, anzahl):
 		print("Mutiere " , anzahl , " Gene")
 		for i in range(anzahl):
-			randomPosition = rd.randint(0, anzahl-1)
-			gen = self.genes[randomPosition]
+			randomPosition = rd.randint(1, anzahl*(anzahl+1)/2)
+			## enforce lower indices to be mutated more the higer positions
+			modifiedPosition = round(math.sqrt(1+8*(randomPosition-1))/2)-1
+			modifiedPosition = anzahl - modifiedPosition
+			if modifiedPosition < 0:
+				modifiedPosition = 0
+			if modifiedPosition >= len(self.genes):
+				modifiedPosition = len(self.genes)-1
+			gen = self.genes[modifiedPosition]
 			gencopy = Gen.Gen(gen.a, gen.b, gen.c)
 			gencopy.mutate()
 			self.genes.append(gencopy)
