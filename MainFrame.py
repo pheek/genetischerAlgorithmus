@@ -35,11 +35,15 @@ class MainFrame:
 			coord = p.x-3, p.y-3, p.x+3, p.y+3
 			self.canvas.create_oval(coord, fill='yellow', width=1)
 
+	## dont paint each single pixel
+	STEPWIDTH = 12
+
 	def drawFunctionSaturation(self, g, colcol, widthi=1):
-		for x in range(FRAME_WIDTH):
+		for step in range((int)((FRAME_WIDTH+MainFrame.STEPWIDTH-1)/MainFrame.STEPWIDTH)):
+			x = (int)(step * MainFrame.STEPWIDTH)
 			y1 = self.fitness.saturationValue(g.a, g.b, g.c, x)
-			y2 = self.fitness.saturationValue(g.a, g.b, g.c, x+1)
-			self.canvas.create_line(x, y1, x+1, y2, fill=colcol, width=widthi)
+			y2 = self.fitness.saturationValue(g.a, g.b, g.c, x+MainFrame.STEPWIDTH)
+			self.canvas.create_line(x, y1, x+MainFrame.STEPWIDTH, y2, fill=colcol, width=widthi)
 
 	def drawFunctionCircle(self, g, colcol, widthi=1):
 		## TODO: Draw Circle

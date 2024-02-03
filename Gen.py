@@ -33,11 +33,11 @@ class Gen:
   ##  6 % (10 % of the remaining 60%) are completly random
   ## the rest is near the old value, but mutated
 	def mutateValue(v):
-		if(rd.random() < 0.4):
+		if(rd.random() < 0.8):
 			return v
-		if(rd.random() < 0.1):
+		if(rd.random() < 0.3):
 			return rd.random()
-		return (rd.random() + 8*v) / 9
+		return (rd.random() + 2*v) / 3
 
 	def mutate(self):
 		self.type = Gen.mutateValue(self.type)
