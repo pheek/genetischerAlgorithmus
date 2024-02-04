@@ -83,7 +83,6 @@ class Model:
 		self.genes = sorted_corresponding_values
 
 
-		
 	def nextGeneration(self):
 		self.sortGenesByFitness()
 
