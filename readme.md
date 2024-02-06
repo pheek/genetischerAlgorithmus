@@ -4,8 +4,13 @@ Genetic Algorithm
 
 ![Screenshot](https://github.com/pheek/genetischerAlgorithmus/blob/main/Screenshot.png)
 
+
 This algorithm tries to approximate some measured points with a saturation func
 tion.
+
+... and also can detect circles...
+
+![ScreenshotCircle](https://github.com/pheek/genetischerAlgorithmus/blob/main/ScreenshotCircle.png)
 
 The algorithm uses the following concepts
 
