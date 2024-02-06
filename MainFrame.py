@@ -9,12 +9,15 @@ import tkinter as tk
 import Model
 import Point
 import Fitness as fitnClass
+import Saturation
+import Circle
 
-FRAME_WIDTH =1600
-FRAME_HEIGHT= 850
 
 class MainFrame:
-
+	
+	FRAME_WIDTH =1600
+	FRAME_HEIGHT= 850
+  
 	def dotHitInCanvas(self, event):
 		self.canvas.delete("all")
 		p = Point.Point(event.x, event.y)
@@ -39,15 +42,12 @@ class MainFrame:
 	STEPWIDTH = 12
 
 	def drawFunctionSaturation(self, g, colcol, widthi=1):
-		for step in range((int)((FRAME_WIDTH+MainFrame.STEPWIDTH-1)/MainFrame.STEPWIDTH)):
-			x = (int)(step * MainFrame.STEPWIDTH)
-			y1 = self.fitness.saturationValue(g.a, g.b, g.c, x)
-			y2 = self.fitness.saturationValue(g.a, g.b, g.c, x+MainFrame.STEPWIDTH)
-			self.canvas.create_line(x, y1, x+MainFrame.STEPWIDTH, y2, fill=colcol, width=widthi)
+		Saturation.Saturation.drawSaturation(self, g, colcol, widthi)
 
 	def drawFunctionCircle(self, g, colcol, widthi=1):
 		## TODO: Draw Circle
-		self.drawFunctionSaturation(g, colcol, widthi)
+		Circle.Circle.drawCircle(self, g, colcol, widthi)
+		##		self.drawFunctionSaturation(g, colcol, widthi)
 
 
 	def drawAllFunctions(self):
@@ -62,7 +62,7 @@ class MainFrame:
 		else:
 			self.drawFunctionSaturation(self.model.getBestGen(), '#0A6', 3)
 
-
+	
 	def setLabelText(self, newText):
 		self.label.config(text=newText)
 
@@ -72,7 +72,7 @@ class MainFrame:
 
 		root = tk.Tk()
 
-		self.canvas = tk.Canvas(root, bg='#eeeeee', width=FRAME_WIDTH, height=FRAME_HEIGHT)
+		self.canvas = tk.Canvas(root, bg='#eeeeee', width=self.FRAME_WIDTH, height=self.FRAME_HEIGHT)
 		self.canvas.pack()
 		self.canvas.bind('<Button>', self.dotHitInCanvas)
 

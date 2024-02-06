@@ -29,16 +29,17 @@ class Gen:
 		  return x2
 		return (x1 + rd.random()*(x2-x1))
 
-	## 40 % are not mutated
-  ##  6 % (10 % of the remaining 60%) are completly random
-  ## the rest is near the old value, but mutated
+	## Muate in different ways
 	def mutateValue(v):
-		if(rd.random() < 0.3):
-			return v
-		if(rd.random() < 0.3):
+		if(rd.random() < 0.1):
 			return rd.random()
-		return (rd.random() + 2*v) / 3
-
+		if(rd.random() < 0.5):
+			return v
+		if(rd.random() < 0.5):
+			return v * 0.7
+		else:
+			return 1-0.7*(1-v)
+	
 	def mutate(self):
 		self.type = Gen.mutateValue(self.type)
 		self.a    = Gen.mutateValue(self.a)

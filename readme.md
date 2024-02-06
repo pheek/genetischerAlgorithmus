@@ -32,7 +32,9 @@ Classes:
 * PointList (.py) : Mostly an array of points, but also the fitness-function
 * Model (.py)     : The genetic algorihtm
 * MainFrame (.py) : A grapical UI
-
+* Circle (.py)    : Detect circles and draw circles
+* Saturation(.py) : Detect and draw saturation functions
+* Fitness (.py)   : calculate fitness of a gen
 
 
 
