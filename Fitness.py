@@ -16,6 +16,8 @@ import Circle
 class Fitness:
 
 	def __init__(self):
+		self.circle     = Circle    .Circle    ()
+		self.saturation = Saturation.Saturation()
 		return
 
 	# all gene values are between 0.0 and 1.0, so
@@ -25,13 +27,12 @@ class Fitness:
 #		return a*v+min
 
 
-
 	def fitnessFunctionCircle(self, pl, gen):
 		## TODO Fitness for cicle
-		return Circle.Circle.fitness(pl, gen)
+		return self.circle.fitness(pl, gen)
 	
 	def fitnessFunctionSaturation(self, pl, gen):
-		return Saturation.Saturation.fitness(pl, gen)
+		return self.saturation.fitness(pl, gen)
 		
 	def fitnessFunction(self, pl, gen):
 		if(gen.type < 0.5):
@@ -40,8 +41,8 @@ class Fitness:
 			return self.fitnessFunctionSaturation(pl, gen)
 
 
-## module test
-if "__main__" == __name__:
+## module test #########
+def testfunction():
 	g = gen.Gen(0.5, 2, 4)
 	pl = PointList.PointList()
 	pl.addPoint(pt.Point(3, 4))
@@ -49,3 +50,6 @@ if "__main__" == __name__:
 
 	f = Fitness()
 	print("Fitness: " , f.fitnessFunction(pl, g))
+	
+if "__main__" == __name__:
+	testfunction()

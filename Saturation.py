@@ -3,7 +3,7 @@
 #
 
 import MainFrame
-import Form
+import Shape as sh
 import math
 
 A_MIN = 0.0000001
@@ -13,31 +13,36 @@ B_MAX = 6000
 C_MIN = 0
 C_MAX = 1200
 
-class Saturation:
+STEPWIDTH = 7
 
-#	@staticmethod
-	def drawSaturation(mainFrame, gen, colcol, widthi=1):
-		for step in range((int)((mainFrame.FRAME_WIDTH + mainFrame.STEPWIDTH-1)/mainFrame.STEPWIDTH)):
-			x = (int)(step * mainFrame.STEPWIDTH)
-			y1 = Saturation.saturationValue(gen, x)
-			y2 = Saturation.saturationValue(gen, x+ mainFrame.STEPWIDTH)
-			mainFrame.canvas.create_line(x, y1, x + mainFrame.STEPWIDTH, y2, fill=colcol, width=widthi)
+class Saturation(sh.Shape):
 
+	def __init__(self):
+		super().__init__()
 
-	def saturationValue(gen, x):
-		AA = Form.Form.stretch(gen.a, A_MIN, A_MAX)
-		BB = Form.Form.stretch(gen.b, B_MIN, B_MAX)
-		CC = Form.Form.stretch(gen.c, C_MIN, C_MAX)
+	def saturationValue(self, gen, x):
+		AA = self.stretch(gen.a, A_MIN, A_MAX)
+		BB = self.stretch(gen.b, B_MIN, B_MAX)
+		CC = self.stretch(gen.c, C_MIN, C_MAX)
 		return CC + BB * math.exp(x * math.log(AA))
 
-	def diff(point, gen):
-		yIst = Saturation.saturationValue(gen, point.x)
+#	@staticmethod
+	def draw(self, fwidth, canvas, gen, colcol, widthi=1):
+		for step in range((int)((fwidth + STEPWIDTH-1)/ STEPWIDTH)):
+			x = (int)(step * STEPWIDTH)
+			y1 = self.saturationValue(gen, x)
+			y2 = self.saturationValue(gen, x+ STEPWIDTH)
+			canvas.create_line(x, y1, x + STEPWIDTH, y2, fill=colcol, width=widthi)
+
+
+	def diff(self, point, gen):
+		yIst = self.saturationValue(gen, point.x)
 		return abs(point.y - yIst)
 
 	## sum of all differences (kehrwert)
-	def fitness(pointList, gen):
+	def fitness(self, pointList, gen):
 		diffS = 0
 		for pt in pointList.getPointsArray():
-			diffS = diffS + Saturation.diff(pt, gen)
+			diffS = diffS + self.diff(pt, gen)
 		diff = 1.0 / diffS
 		return diff

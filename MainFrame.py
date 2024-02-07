@@ -15,8 +15,8 @@ import Circle
 
 class MainFrame:
 	
-	FRAME_WIDTH =1600
-	FRAME_HEIGHT= 850
+	FRAME_WIDTH  = 1600
+	FRAME_HEIGHT =  850
   
 	def dotHitInCanvas(self, event):
 		self.canvas.delete("all")
@@ -42,11 +42,11 @@ class MainFrame:
 	STEPWIDTH = 12
 
 	def drawFunctionSaturation(self, g, colcol, widthi=1):
-		Saturation.Saturation.drawSaturation(self, g, colcol, widthi)
+		self.saturation.draw(MainFrame.FRAME_WIDTH, self.canvas, g, colcol, widthi)
 
 	def drawFunctionCircle(self, g, colcol, widthi=1):
 		## TODO: Draw Circle
-		Circle.Circle.drawCircle(self, g, colcol, widthi)
+		self.circle.draw(self.canvas, g, colcol, widthi)
 		##		self.drawFunctionSaturation(g, colcol, widthi)
 
 
@@ -54,14 +54,13 @@ class MainFrame:
 		self.canvas.delete("all")
 		for g in self.model.getGeneArray():
 			if g.type < 0.5:
-				self.drawFunctionCircle(g, '#3f3')
+				self.drawFunctionCircle(g, '#88f')
 			else:
-				self.drawFunctionSaturation(g, '#3f3')
-		if g.type < 0.5:
-			self.drawFunctionCircle(self.model.getBestGen(), '#0A6', 3)
+				self.drawFunctionSaturation(g, '#8f8')
+		if self.model.getBestGen().type < 0.5:
+			self.drawFunctionCircle(self.model.getBestGen(), '#F6A', 3)
 		else:
-			self.drawFunctionSaturation(self.model.getBestGen(), '#0A6', 3)
-
+			self.drawFunctionSaturation(self.model.getBestGen(), '#FA6', 3)
 	
 	def setLabelText(self, newText):
 		self.label.config(text=newText)
@@ -76,6 +75,9 @@ class MainFrame:
 		self.canvas.pack()
 		self.canvas.bind('<Button>', self.dotHitInCanvas)
 
+		self.circle     = Circle    .Circle    ()
+		self.saturation = Saturation.Saturation()
+		
 		frame = tk.Frame(root)
 		frame.pack()
 
@@ -88,7 +90,6 @@ class MainFrame:
 		self.setLabelText("fitness =")
 
 		root.mainloop()
-
 
 ## start MainFrame
 if "__main__" == __name__:
