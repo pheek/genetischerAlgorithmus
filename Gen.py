@@ -10,6 +10,7 @@
 # circle    : a, b, c mean     (a,b) as midpoint and c as radius
 
 import random as rd
+from numpy import random as nrp
 #import math
 
 class Gen:
@@ -36,14 +37,20 @@ class Gen:
 
 	## Muate in different ways
 	def mutateValue(v):
+		## 5%: complete new mutation
 		if(rd.random() < 0.05):
 			return rd.random()
-		if(rd.random() < 0.6):
+		## 80% don't change
+		if(rd.random() < 0.8):
 			return v
-		if(rd.random() < 0.5):
-			return v  -  v * 0.2 * rd.random()
-		else:
-			return v + (1-v) * 0.2 * rd.random()
+		## binomial distribution betwenn 0.0 and 1.1 nearest to existing v
+		newv = float((nrp.binomial(n=200, p=v, size=1) / 200)[0])
+		if newv < 0.000001:
+			return 0.000001
+		if newv > 0.999999:
+			return 0.999999
+		return newv
+		
 
 	def mutate(self):
 		self.type = Gen.mutateValue(self.type)
