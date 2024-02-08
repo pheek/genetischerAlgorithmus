@@ -26,10 +26,12 @@ class Gen:
 			self.c = rd.random()
 
 	def cross(x1, x2):
+		## je 40% for x1 or x2
 		if rd.random() < 0.4:
 			return x1
-		if rd.random() < 0.24:
+		if rd.random() < 0.667:
 		  return x2
+	  ## 20 % for between those two
 		return (x1 + rd.random()*(x2-x1))
 
 	## Muate in different ways

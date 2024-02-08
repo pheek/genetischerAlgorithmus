@@ -5,10 +5,15 @@ import MainFrame
 import Shape as sh
 import math
 
+# gen a:
 X_MIN = 0
 X_MAX = 2000
+
+# gen b:
 Y_MIN = 0
 Y_MAX = 1200
+
+# gen c: 
 R_MIN = 10
 R_MAX = 500
 
@@ -31,6 +36,7 @@ class Circle(sh.Shape):
 		r = self.stretch(gen.c, R_MIN, R_MAX)
 		self.paint_circle(x, y, r, canvas, colcol, widthi)
 
+  # difference to a single point
 	def diff(self, point, gen):
 		gx = self.stretch(gen.a, X_MIN, X_MAX)
 		gy = self.stretch(gen.b, Y_MIN, Y_MAX)
