@@ -3,8 +3,11 @@
 ##
 # ph. freimann
 # 2024-01-27 Gen for genetic algorithm
-# a in 0..1 is the base of the exopnetial saturation function
-# b,c are saturation and starting saturation-difference
+# attributes
+# type <0.5: circle
+#      >0.5: saturation
+# saturation: a, b, c mean     c  + b*a^x
+# circle    : a, b, c mean     (a,b) as midpoint and c as radius
 
 import random as rd
 #import math
@@ -21,7 +24,7 @@ class Gen:
 			self.a = rd.random()
 			self.b = rd.random()
 			self.c = rd.random()
- 
+
 	def cross(x1, x2):
 		if rd.random() < 0.4:
 			return x1
@@ -39,7 +42,7 @@ class Gen:
 			return v  -  v * 0.2 * rd.random()
 		else:
 			return v + (1-v) * 0.2 * rd.random()
-	
+
 	def mutate(self):
 		self.type = Gen.mutateValue(self.type)
 		self.a    = Gen.mutateValue(self.a)
@@ -55,7 +58,6 @@ class Gen:
 		newGen.b    = Gen.cross(self.b   , other.b)
 		newGen.c    = Gen.cross(self.c   , other.c)
 		return newGen
-		
 
 	def __str__(self):
 		if(self.type < 0.5):
