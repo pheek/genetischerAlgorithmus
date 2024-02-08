@@ -51,7 +51,7 @@ class Model:
 		neueGene = []
 		for i in range(anzahl):
 			elt1, elt2 = rd.sample(self.genes, 2)
-			neueGene.append(elt1.crossover(elt2))
+			neueGene.append(elt1 * elt2)
 		self.genes = self.genes + neueGene
 
 

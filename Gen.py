@@ -31,22 +31,24 @@ class Gen:
 
 	## Muate in different ways
 	def mutateValue(v):
-		if(rd.random() < 0.1):
+		if(rd.random() < 0.05):
 			return rd.random()
-		if(rd.random() < 0.5):
+		if(rd.random() < 0.6):
 			return v
 		if(rd.random() < 0.5):
-			return v * 0.7
+			return v  -  v * 0.2 * rd.random()
 		else:
-			return 1-0.7*(1-v)
+			return v + (1-v) * 0.2 * rd.random()
 	
 	def mutate(self):
 		self.type = Gen.mutateValue(self.type)
 		self.a    = Gen.mutateValue(self.a)
 		self.b    = Gen.mutateValue(self.b)
 		self.c    = Gen.mutateValue(self.c)
-		
-	def crossover(self, other):
+
+	## crossover is applied using the multiply operator *
+	## newGen = firstElder * secondElder
+	def __mul__(self, other):
 		newGen = Gen()
 		newGen.type = Gen.cross(self.type, other.type)
 		newGen.a    = Gen.cross(self.a   , other.a)
@@ -67,7 +69,8 @@ def module_test():
 	g1 = Gen()
 	g2 = Gen(0.5, 0.4, 0.9)
 
-	g3 = g1.crossover(g2)
+	## crossover g3 = child of g1 and g2
+	g3 = g1 * g2
 	print("Gen1", g1)
 	print("Gen2", g2)
 	print("Gen3", g3)
