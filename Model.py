@@ -14,10 +14,10 @@ import Gen
 import PointList
 
 
-NR_OF_GENES             = 1500
+NR_OF_GENES             = 500
 F_BEHALTEN              = 0.20   # 10 % keep
-F_CROSSOVER             = 0.60   # 20 % crossover
-F_MUTATE                = 0.15   # 50 % mutation, the rest are random new genes
+F_CROSSOVER             = 0.40   # 20 % crossover
+F_MUTATE                = 0.35   # 50 % mutation, the rest are random new genes
 
 F_GENERATIONS_PER_CLICK = 1
 # der rest wird neu erschaffen
