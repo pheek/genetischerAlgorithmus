@@ -14,7 +14,7 @@ tion.
 
 ... and parabolas.
 
-![ScreenshotParabola](![ScreenshotCircle](https://github.com/pheek/genetischerAlgorithmus/blob/main/ScreenshotCircle.png)
+![ScreenshotParabola](![ScreenshotParabel](https://github.com/pheek/genetischerAlgorithmus/blob/main/ScreenshotParabel.png)
 
 
 
