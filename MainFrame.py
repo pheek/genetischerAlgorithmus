@@ -57,20 +57,20 @@ class MainFrame:
 		self.canvas.delete("all")
 		for g in self.model.getGeneArray():
 			if g.type < 0.33:
-				self.drawFunctionCircle(g, '#88f')
+				self.drawFunctionCircle(g, '#aaf')
 			elif g.type >= 0.33 and g.type < 0.67:
-				self.drawFunctionSaturation(g, '#8f8')
+				self.drawFunctionSaturation(g, '#afa')
 			else :
-				self.drawFunctionParabel(g, '#f88')
+				self.drawFunctionParabel(g, '#ffa')
 				
 				
 		if self.model.getBestGen().type < 0.33:
-			self.drawFunctionCircle(self.model.getBestGen(), '#F6A', 3)
+			self.drawFunctionCircle(self.model.getBestGen(), '#F55', 3)
 			return
 		if self.model.getBestGen().type >= 0.33 and self.model.getBestGen().type < 0.67:
-			self.drawFunctionSaturation(self.model.getBestGen(), '#FA6', 3)
+			self.drawFunctionSaturation(self.model.getBestGen(), '#F55', 3)
 			return
-		self.drawFunctionParabel(self.model.getBestGen(), '#FA6', 3)
+		self.drawFunctionParabel(self.model.getBestGen(), '#F55', 3)
 		
 	def setLabelText(self, newText):
 		self.label.config(text=newText)

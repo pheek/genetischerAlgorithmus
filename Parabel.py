@@ -31,12 +31,12 @@ class Parabel(sh.Shape):
 
 #	@staticmethod
 	def draw(self, fwidth, canvas, gen, colcol, widthi=1):
+		y1 = self.parabelValue(gen, 0)
 		for step in range((int)((fwidth + STEPWIDTH-1)/ STEPWIDTH)):
 			x = (int)(step * STEPWIDTH)
-			y1 = self.parabelValue(gen, x)
 			y2 = self.parabelValue(gen, x+ STEPWIDTH)
 			canvas.create_line(x, y1, x + STEPWIDTH, y2, fill=colcol, width=widthi)
-
+			y1 = y2
 
 	def diff(self, point, gen):
 		yIst = self.parabelValue(gen, point.x)
