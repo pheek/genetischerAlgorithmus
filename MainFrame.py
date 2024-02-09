@@ -11,7 +11,7 @@ import Point
 import Fitness as fitnClass
 import Saturation
 import Circle
-
+import Parabel
 
 class MainFrame:
 	
@@ -44,6 +44,9 @@ class MainFrame:
 	def drawFunctionSaturation(self, g, colcol, widthi=1):
 		self.saturation.draw(MainFrame.FRAME_WIDTH, self.canvas, g, colcol, widthi)
 
+	def drawFunctionParabel(self, g, colcol, widthi=1):
+		self.parabel.draw(MainFrame.FRAME_WIDTH, self.canvas, g, colcol, widthi)
+
 	def drawFunctionCircle(self, g, colcol, widthi=1):
 		## TODO: Draw Circle
 		self.circle.draw(self.canvas, g, colcol, widthi)
@@ -53,15 +56,22 @@ class MainFrame:
 	def drawAllFunctions(self):
 		self.canvas.delete("all")
 		for g in self.model.getGeneArray():
-			if g.type < 0.5:
+			if g.type < 0.33:
 				self.drawFunctionCircle(g, '#88f')
-			else:
+			elif g.type >= 0.33 and g.type < 0.67:
 				self.drawFunctionSaturation(g, '#8f8')
-		if self.model.getBestGen().type < 0.5:
+			else :
+				self.drawFunctionParabel(g, '#f88')
+				
+				
+		if self.model.getBestGen().type < 0.33:
 			self.drawFunctionCircle(self.model.getBestGen(), '#F6A', 3)
-		else:
+			return
+		if self.model.getBestGen().type >= 0.33 and self.model.getBestGen().type < 0.67:
 			self.drawFunctionSaturation(self.model.getBestGen(), '#FA6', 3)
-	
+			return
+		self.drawFunctionParabel(self.model.getBestGen(), '#FA6', 3)
+		
 	def setLabelText(self, newText):
 		self.label.config(text=newText)
 
@@ -77,6 +87,7 @@ class MainFrame:
 
 		self.circle     = Circle    .Circle    ()
 		self.saturation = Saturation.Saturation()
+		self.parabel    = Parabel   .Parabel   ()
 		
 		frame = tk.Frame(root)
 		frame.pack()

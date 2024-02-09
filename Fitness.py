@@ -12,12 +12,14 @@ import math
 import PointList
 import Saturation
 import Circle
+import Parabel
 
 class Fitness:
 
 	def __init__(self):
 		self.circle     = Circle    .Circle    ()
 		self.saturation = Saturation.Saturation()
+		self.parabel    = Parabel   .Parabel   ()
 		return
 
 	# all gene values are between 0.0 and 1.0, so
@@ -28,18 +30,20 @@ class Fitness:
 
 
 	def fitnessFunctionCircle(self, pl, gen):
-		## TODO Fitness for cicle
 		return self.circle.fitness(pl, gen)
+	
+	def fitnessFunctionParabel(self, pl, gen):
+		return self.parabel.fitness(pl, gen)
 	
 	def fitnessFunctionSaturation(self, pl, gen):
 		return self.saturation.fitness(pl, gen)
 		
 	def fitnessFunction(self, pl, gen):
-		if(gen.type < 0.5):
+		if(gen.type < 0.33):
 			return self.fitnessFunctionCircle(pl, gen)
-		else:
+		if(gen.type >= 0.33 and gen.type < 0.67):
 			return self.fitnessFunctionSaturation(pl, gen)
-
+		return self.fitnessFunctionParabel(pl, gen)
 
 ## module test #########
 def testfunction():
