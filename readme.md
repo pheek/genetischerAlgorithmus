@@ -12,6 +12,12 @@ tion.
 
 ![ScreenshotCircle](https://github.com/pheek/genetischerAlgorithmus/blob/main/ScreenshotCircle.png)
 
+... and parabolas.
+
+![ScreenshotParabola](![ScreenshotCircle](https://github.com/pheek/genetischerAlgorithmus/blob/main/ScreenshotCircle.png)
+
+
+
 The algorithm uses the following concepts
 
 Fitness
@@ -21,10 +27,11 @@ The function having the least sum of differences to the given points has the bes
 Crossover
 ---------
 Two genes are "crossed-overed" having each gene of the first parent, the second parent or the average.
+Technically the *-operator (__mul__ in python) was used. 
 
 Mutate
 ------
-A mutation is about 10% or less of the given value. The base of the exponential function must be between 0 and 1. Otherwise it is no saturation function. This is the only "mathematical" concept
+Not every gen is mutated. Some are unouched, some are complete new and some are bionmial distributed around the old value. All values of all genes are allways between 0.0 and 1.0
 
 New genes
 ---------
@@ -37,9 +44,13 @@ Classes:
 * PointList (.py) : Mostly an array of points, but also the fitness-function
 * Model (.py)     : The genetic algorihtm
 * MainFrame (.py) : A grapical UI
+
+* Fitness (.py)   : calculate fitness of a ge
+
+* Shape(.py)      : Helper Functions for all the following shapes
 * Circle (.py)    : Detect circles and draw circles
 * Saturation(.py) : Detect and draw saturation functions
-* Fitness (.py)   : calculate fitness of a gen
+* Parabel(.py)    : Detect parobolas
 
 
 
