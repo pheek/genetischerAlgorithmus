@@ -3,12 +3,13 @@
 
 ##
 # ph. freimann
-# 2024-01-27 Fitness function
+# 2024-01-27 Fitness functions
 #
+
+import math
 
 import Gen as gen
 import Point as pt
-import math
 import PointList
 import Saturation
 import Circle
@@ -22,22 +23,15 @@ class Fitness:
 		self.parabel    = Parabel   .Parabel   ()
 		return
 
-	# all gene values are between 0.0 and 1.0, so
-  # they are stretched between min and max.
-#	def stretch(v, min, max):
-#		a= max-min
-#		return a*v+min
-
-
 	def fitnessFunctionCircle(self, pl, gen):
 		return self.circle.fitness(pl, gen)
-	
+
 	def fitnessFunctionParabel(self, pl, gen):
 		return self.parabel.fitness(pl, gen)
-	
+
 	def fitnessFunctionSaturation(self, pl, gen):
 		return self.saturation.fitness(pl, gen)
-		
+
 	def fitnessFunction(self, pl, gen):
 		if(gen.type < 0.33):
 			return self.fitnessFunctionCircle(pl, gen)
@@ -54,6 +48,6 @@ def testfunction():
 
 	f = Fitness()
 	print("Fitness: " , f.fitnessFunction(pl, g))
-	
+
 if "__main__" == __name__:
 	testfunction()

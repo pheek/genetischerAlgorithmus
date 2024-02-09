@@ -8,10 +8,10 @@
 #      >0.5: saturation
 # saturation: a, b, c mean     c  + b*a^x
 # circle    : a, b, c mean     (a,b) as midpoint and c as radius
+# parabola  : a, b, c mean     a(x-b)(x-b) + c
 
 import random as rd
 from numpy import random as nrp
-#import math
 
 class Gen:
 
@@ -44,7 +44,7 @@ class Gen:
 		if(rd.random() < 0.8):
 			return v
 		## binomial distribution betwenn 0.0 and 1.1 nearest to existing v
-		newv = float((nrp.binomial(n=200, p=v, size=1) / 200)[0])
+		newv = float((nrp.binomial(n=250, p=v, size=1) / 250)[0])
 		if newv < 0.000001:
 			return 0.000001
 		if newv > 0.999999:
