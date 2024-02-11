@@ -2,6 +2,9 @@
 # Detect and draw an saturation function
 #
 
+## 2024-02 github.com/pheek
+
+
 import MainFrame
 import Shape as sh
 import math

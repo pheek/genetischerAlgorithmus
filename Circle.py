@@ -1,21 +1,23 @@
 # (c) ph. freimann 2024
-# Detect and draw a circel
+# Detect and draw a circle
+
+## 2024-02 github.com/pheek
 
 import MainFrame
 import Shape as sh
 import math
 
 # gen a:
-X_MIN = 0
+X_MIN =    0
 X_MAX = 2000
 
 # gen b:
-Y_MIN = 0
+Y_MIN =    0
 Y_MAX = 1200
 
 # gen c: 
-R_MIN = 10
-R_MAX = 500
+R_MIN =   8
+R_MAX = 600
 
 class Circle(sh.Shape):
 
@@ -31,16 +33,16 @@ class Circle(sh.Shape):
 		canvas.create_oval(x0, y0, x1, y1, outline=colcol, width=widthi)
 
 	def draw(self, canvas, gen, colcol, widthi=1):
-		x = self.stretch(gen.a, X_MIN, X_MAX)
-		y = self.stretch(gen.b, Y_MIN, Y_MAX)
-		r = self.stretch(gen.c, R_MIN, R_MAX)
+		r = self.stretch(gen.a, R_MIN, R_MAX)
+		x = self.stretch(gen.b, X_MIN, X_MAX)
+		y = self.stretch(gen.c, Y_MIN, Y_MAX)
 		self.paint_circle(x, y, r, canvas, colcol, widthi)
 
   # difference to a single point
 	def diff(self, point, gen):
-		gx = self.stretch(gen.a, X_MIN, X_MAX)
-		gy = self.stretch(gen.b, Y_MIN, Y_MAX)
-		gr = self.stretch(gen.c, R_MIN, R_MAX)
+		gr = self.stretch(gen.a, R_MIN, R_MAX)
+		gx = self.stretch(gen.b, Y_MIN, X_MAX)
+		gy = self.stretch(gen.c, X_MIN, Y_MAX)
 		px = point.x
 		py = point.y
 		len = math.sqrt((px-gx)*(px-gx) + (py-gy)*(py-gy))

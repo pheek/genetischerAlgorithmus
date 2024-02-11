@@ -3,23 +3,26 @@
 ##
 # ph. freimann
 # 2024-01-27 Gen-Pool Modell
+# Here is defined how many genes are used, how many are kept each
+# generation, how many are crossoverd and how many are mutated
+# and the rest are completlely new generated.
 #
 
 import random as rd
 import numpy as np
 import math
-import Fitness as fitnClass
 
+import Fitness as fitnClass
 import Gen
 import PointList
 
 
-NR_OF_GENES             = 2000
+NR_OF_GENES             = 1000
 F_BEHALTEN              = 0.10   # 10 % keep
-F_CROSSOVER             = 0.30   # 30 % crossover
-F_MUTATE                = 0.30   # 30 % Mutation der besten: "F_BEALTEN"
+F_CROSSOVER             = 0.25   # 30 % crossover
+F_MUTATE                = 0.25   # 30 % Mutation der besten: "F_BEALTEN"
 
-F_GENERATIONS_PER_CLICK = 1
+F_GENERATIONS_PER_CLICK = 10
 # der rest wird neu erschaffen
 
 class Model:
@@ -82,7 +85,6 @@ class Model:
 
 		self.genes = sorted_corresponding_values
 
-
 	def nextGeneration(self):
 		self.sortGenesByFitness()
 
@@ -104,7 +106,7 @@ class Model:
 		while len(self.genes) < NR_OF_GENES:
 			self.genes.append(Gen.Gen())
 
-			# do buddon start hit
+	# do buddon start hit
 	def nextGenerations(self):
 		if self.generation < 2:
 			self.generation = self.generation + 1
