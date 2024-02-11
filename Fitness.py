@@ -37,9 +37,11 @@ class Fitness:
 		
 		return CC + BB * math.exp(x * math.log(AA))
 
+	def circleValue(self, a, b, c, x):
+		## NOT YET
+		return
 
 	def fitnessFunctionCircle(self, pl, gen):
-		## TODO Fitness for cicle
 		return self.fitnessFunctionSaturation(pl, gen)
 	
 	def fitnessFunctionSaturation(self, pl, gen):
