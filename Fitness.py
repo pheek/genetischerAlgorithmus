@@ -3,26 +3,27 @@
 
 ##
 # ph. freimann
-# 2024-01-27 Fitness function
+# 2024-01-27 Fitness functions
 #
+
+import math
 
 import Gen as gen
 import Point as pt
-import math
 import PointList
-
-A_MIN = 0.00001
-A_MAX = 1.0
-B_MIN = -4000
-B_MAX = 6000
-C_MIN = 0
-C_MAX = 1200
+import Saturation
+import Circle
+import Parabel
 
 class Fitness:
 
 	def __init__(self):
+		self.circle     = Circle    .Circle    ()
+		self.saturation = Saturation.Saturation()
+		self.parabel    = Parabel   .Parabel   ()
 		return
 
+<<<<<<< HEAD
 	# all gene values are between 0.0 and 1.0, so
   # they are stretched between min and max.
 	def stretch(v, min, max):
@@ -44,23 +45,26 @@ class Fitness:
 	def fitnessFunctionCircle(self, pl, gen):
 		return self.fitnessFunctionSaturation(pl, gen)
 	
+=======
+	def fitnessFunctionCircle(self, pl, gen):
+		return self.circle.fitness(pl, gen)
+
+	def fitnessFunctionParabel(self, pl, gen):
+		return self.parabel.fitness(pl, gen)
+
+>>>>>>> 04b337c67618b651844b75a999627df4f6b30613
 	def fitnessFunctionSaturation(self, pl, gen):
-		diffSum = 0
-		for pt in pl.getPointsArray():
-			yIst = self.saturationValue(gen.a, gen.b, gen.c, pt.x)
-			diffSum = diffSum + abs(pt.y - yIst)
-		diff = 1.0/diffSum
-		return diff
+		return self.saturation.fitness(pl, gen)
 
 	def fitnessFunction(self, pl, gen):
-		if(gen.type < 0.5):
+		if(gen.type < 0.33):
 			return self.fitnessFunctionCircle(pl, gen)
-		else:
+		if(gen.type >= 0.33 and gen.type < 0.67):
 			return self.fitnessFunctionSaturation(pl, gen)
+		return self.fitnessFunctionParabel(pl, gen)
 
-
-## module test
-if "__main__" == __name__:
+## module test #########
+def testfunction():
 	g = gen.Gen(0.5, 2, 4)
 	pl = PointList.PointList()
 	pl.addPoint(pt.Point(3, 4))
@@ -68,3 +72,6 @@ if "__main__" == __name__:
 
 	f = Fitness()
 	print("Fitness: " , f.fitnessFunction(pl, g))
+
+if "__main__" == __name__:
+	testfunction()

@@ -14,10 +14,10 @@ import Gen
 import PointList
 
 
-NR_OF_GENES             = 1000
+NR_OF_GENES             = 2000
 F_BEHALTEN              = 0.10   # 10 % keep
-F_CROSSOVER             = 0.40   # 20 % crossover
-F_MUTATE                = 0.35   # 50 % mutation, the rest are random new genes
+F_CROSSOVER             = 0.30   # 30 % crossover
+F_MUTATE                = 0.30   # 30 % Mutation der besten: "F_BEALTEN"
 
 F_GENERATIONS_PER_CLICK = 1
 # der rest wird neu erschaffen
@@ -51,17 +51,17 @@ class Model:
 		neueGene = []
 		for i in range(anzahl):
 			elt1, elt2 = rd.sample(self.genes, 2)
-			neueGene.append(elt1.crossover(elt2))
+			neueGene.append(elt1 * elt2)
 		self.genes = self.genes + neueGene
 
 
-	def mutateSome(self, anzahl):
+	def mutateSome(self, anzahlBehalten, anzahl):
 		print("Mutiere " , anzahl , " Gene")
 		for i in range(anzahl):
-			randomPosition = rd.randint(1, anzahl*(anzahl+1)/2)
+			randomPosition = rd.randint(1, anzahlBehalten*(anzahlBehalten+1)/2)
 			## enforce lower indices to be mutated more the higer positions
 			modifiedPosition = round(math.sqrt(1+8*(randomPosition-1))/2)-1
-			modifiedPosition = anzahl - modifiedPosition
+			modifiedPosition = anzahlBehalten - modifiedPosition
 			if modifiedPosition < 0:
 				modifiedPosition = 0
 			if modifiedPosition >= len(self.genes):
@@ -93,9 +93,12 @@ class Model:
 		for index in range(0, behalten-1):
 			self.genes.append(genescopy[index])
 
+	  ## crossover. Es werden nur von den besten crossover gemacht,
+	  ## denn nur die besten sind im Moment in "self.genes"
 		self.crossoverSome(round(NR_OF_GENES*F_CROSSOVER + 0.5))
 
-		self.mutateSome(round(NR_OF_GENES*F_MUTATE + 0.5))
+		## Mutiere aus den besten (nicht aus den "gecrosstoverten")
+		self.mutateSome(behalten, round(NR_OF_GENES*F_MUTATE + 0.5))
 
 		## create new genes
 		while len(self.genes) < NR_OF_GENES:

@@ -9,12 +9,15 @@ import tkinter as tk
 import Model
 import Point
 import Fitness as fitnClass
-
-FRAME_WIDTH =1600
-FRAME_HEIGHT= 850
+import Saturation
+import Circle
+import Parabel
 
 class MainFrame:
-
+	
+	FRAME_WIDTH  = 1600
+	FRAME_HEIGHT =  850
+  
 	def dotHitInCanvas(self, event):
 		self.canvas.delete("all")
 		p = Point.Point(event.x, event.y)
@@ -39,30 +42,36 @@ class MainFrame:
 	STEPWIDTH = 12
 
 	def drawFunctionSaturation(self, g, colcol, widthi=1):
-		for step in range((int)((FRAME_WIDTH+MainFrame.STEPWIDTH-1)/MainFrame.STEPWIDTH)):
-			x = (int)(step * MainFrame.STEPWIDTH)
-			y1 = self.fitness.saturationValue(g.a, g.b, g.c, x)
-			y2 = self.fitness.saturationValue(g.a, g.b, g.c, x+MainFrame.STEPWIDTH)
-			self.canvas.create_line(x, y1, x+MainFrame.STEPWIDTH, y2, fill=colcol, width=widthi)
+		self.saturation.draw(MainFrame.FRAME_WIDTH, self.canvas, g, colcol, widthi)
+
+	def drawFunctionParabel(self, g, colcol, widthi=1):
+		self.parabel.draw(MainFrame.FRAME_WIDTH, self.canvas, g, colcol, widthi)
 
 	def drawFunctionCircle(self, g, colcol, widthi=1):
 		## TODO: Draw Circle
-		self.drawFunctionSaturation(g, colcol, widthi)
+		self.circle.draw(self.canvas, g, colcol, widthi)
+		##		self.drawFunctionSaturation(g, colcol, widthi)
 
 
 	def drawAllFunctions(self):
 		self.canvas.delete("all")
 		for g in self.model.getGeneArray():
-			if g.type < 0.5:
-				self.drawFunctionCircle(g, '#3f3')
-			else:
-				self.drawFunctionSaturation(g, '#3f3')
-		if g.type < 0.5:
-			self.drawFunctionCircle(self.model.getBestGen(), '#0A6', 3)
-		else:
-			self.drawFunctionSaturation(self.model.getBestGen(), '#0A6', 3)
-
-
+			if g.type < 0.33:
+				self.drawFunctionCircle(g, '#aaf')
+			elif g.type >= 0.33 and g.type < 0.67:
+				self.drawFunctionSaturation(g, '#afa')
+			else :
+				self.drawFunctionParabel(g, '#ffa')
+				
+				
+		if self.model.getBestGen().type < 0.33:
+			self.drawFunctionCircle(self.model.getBestGen(), '#F55', 3)
+			return
+		if self.model.getBestGen().type >= 0.33 and self.model.getBestGen().type < 0.67:
+			self.drawFunctionSaturation(self.model.getBestGen(), '#F55', 3)
+			return
+		self.drawFunctionParabel(self.model.getBestGen(), '#F55', 3)
+		
 	def setLabelText(self, newText):
 		self.label.config(text=newText)
 
@@ -72,10 +81,14 @@ class MainFrame:
 
 		root = tk.Tk()
 
-		self.canvas = tk.Canvas(root, bg='#eeeeee', width=FRAME_WIDTH, height=FRAME_HEIGHT)
+		self.canvas = tk.Canvas(root, bg='#eeeeee', width=self.FRAME_WIDTH, height=self.FRAME_HEIGHT)
 		self.canvas.pack()
 		self.canvas.bind('<Button>', self.dotHitInCanvas)
 
+		self.circle     = Circle    .Circle    ()
+		self.saturation = Saturation.Saturation()
+		self.parabel    = Parabel   .Parabel   ()
+		
 		frame = tk.Frame(root)
 		frame.pack()
 
@@ -88,7 +101,6 @@ class MainFrame:
 		self.setLabelText("fitness =")
 
 		root.mainloop()
-
 
 ## start MainFrame
 if "__main__" == __name__:

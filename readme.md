@@ -4,8 +4,19 @@ Genetic Algorithm
 
 ![Screenshot](https://github.com/pheek/genetischerAlgorithmus/blob/main/Screenshot.png)
 
+
 This algorithm tries to approximate some measured points with a saturation func
 tion.
+
+... and also can detect circles...
+
+![ScreenshotCircle](https://github.com/pheek/genetischerAlgorithmus/blob/main/ScreenshotCircle.png)
+
+... and parabolas.
+
+![ScreenshotParabola](![ScreenshotParabel](https://github.com/pheek/genetischerAlgorithmus/blob/main/ScreenshotParabel.png)
+
+
 
 The algorithm uses the following concepts
 
@@ -16,10 +27,11 @@ The function having the least sum of differences to the given points has the bes
 Crossover
 ---------
 Two genes are "crossed-overed" having each gene of the first parent, the second parent or the average.
+Technically the *-operator (__mul__ in python) was used. 
 
 Mutate
 ------
-A mutation is about 10% or less of the given value. The base of the exponential function must be between 0 and 1. Otherwise it is no saturation function. This is the only "mathematical" concept
+Not every gen is mutated. Some are unouched, some are complete new and some are bionmial distributed around the old value. All values of all genes are allways between 0.0 and 1.0
 
 New genes
 ---------
@@ -33,6 +45,12 @@ Classes:
 * Model (.py)     : The genetic algorihtm
 * MainFrame (.py) : A grapical UI
 
+* Fitness (.py)   : calculate fitness of a ge
+
+* Shape(.py)      : Helper Functions for all the following shapes
+* Circle (.py)    : Detect circles and draw circles
+* Saturation(.py) : Detect and draw saturation functions
+* Parabel(.py)    : Detect parobolas
 
 
 
