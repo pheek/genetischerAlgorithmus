@@ -24,7 +24,9 @@ class Parabel(sh.Shape):
 		super().__init__()
 
 	def parabelValue(self, gen, x):
-		FA = (gen.a - 0.5) * (0.5 - gen.a) * 2 * FA_MAX 
+		FA = (gen.a - 0.5) * (gen.a - 0.5) * 2 * FA_MAX
+		if gen.a < 0.5:
+			FA = -FA
 		XS = self.stretch(gen.b, XS_MIN, XS_MAX)
 		YS = self.stretch(gen.c, YS_MIN, YS_MAX)
 		return FA * (XS - x)*(XS-x) + YS
