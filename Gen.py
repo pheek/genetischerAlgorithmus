@@ -3,6 +3,7 @@
 ##
 # ph. freimann
 # 2024-01-27 Gen for genetic algorithm
+#
 # attributes
 # type <0.5: circle
 #      >0.5: saturation

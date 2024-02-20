@@ -2,12 +2,15 @@
 # Detect and draw an saturation function
 #
 
+## 2024-02 github.com/pheek
+
+
 import MainFrame
 import Shape as sh
 import math
 
-FA_MIN =  0.00001
-FA_MAX =  500
+#FA_MIN =  0
+FA_MAX = 1.2
 XS_MIN = 0
 XS_MAX = 2000
 YS_MIN = 0
@@ -21,10 +24,9 @@ class Parabel(sh.Shape):
 		super().__init__()
 
 	def parabelValue(self, gen, x):
-		FA = 1.0 / self.stretch(gen.a,      FA_MIN, FA_MAX)
-		if(gen.a < 0.5):
-			FA= -FA
-#		print ("GEN: a = " , gen.a, ' --> a = ', FA)
+		FA = (gen.a - 0.5) * (gen.a - 0.5) * 2 * FA_MAX
+		if gen.a < 0.5:
+			FA = -FA
 		XS = self.stretch(gen.b, XS_MIN, XS_MAX)
 		YS = self.stretch(gen.c, YS_MIN, YS_MAX)
 		return FA * (XS - x)*(XS-x) + YS
