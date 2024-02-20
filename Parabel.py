@@ -31,6 +31,27 @@ class Parabel(sh.Shape):
 		YS = self.stretch(gen.c, YS_MIN, YS_MAX)
 		return FA * (XS - x)*(XS-x) + YS
 
+	def distance(self, xp, yp, a, b, c):
+		zaehler = abs(yp-(a*xp*xp+b*yp+c))
+		klammer = 2*a*xp + b
+		nenner  = math.sqrt(1+klammer*klammer)
+		return zaehler/nenner
+
+	def abstandParabelPunkt(self, point, gen):
+		xp = point.x
+		yp = point.y
+		a  = (gen.a - 0.5) * (gen.a - 0.5) * 2 * FA_MAX
+		if gen.a < 0.5:
+			a=-a
+		xs = self.stretch(gen.b, XS_MIN, XS_MAX)
+		ys = self.stretch(gen.c, YS_MIN, YS_MAX)
+		b = 2 * xs * a
+		c = a * xs*xs + ys
+		abst = self.distance(xp,yp, a, b, c)
+		print("Abst Parabel y=" , a , " x^2 , " , b , " x , " , c , " zu P(" ,xp , ", " , yp , ") ist gleich " , abst)
+		return abst
+
+
 #	@staticmethod
 	def draw(self, fwidth, canvas, gen, colcol, widthi=1):
 		y1 = self.parabelValue(gen, 0)
@@ -49,5 +70,6 @@ class Parabel(sh.Shape):
 		diffS = 0
 		for pt in pointList.getPointsArray():
 			diffS = diffS + self.diff(pt, gen)
+#			diffS = diffS + self.diff(pt, gen)
 		diff = 1.0 / diffS
 		return diff
