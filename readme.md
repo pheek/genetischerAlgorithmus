@@ -5,8 +5,7 @@ Genetic Algorithm
 ![Screenshot](https://github.com/pheek/genetischerAlgorithmus/blob/main/Screenshot.png)
 
 
-This algorithm tries to approximate some measured points with a saturation func
-tion.
+This algorithm tries to approximate some measured points with a saturation function.
 
 ... and also can detect circles...
 
@@ -26,12 +25,12 @@ The function having the least sum of differences to the given points has the bes
 
 Crossover
 ---------
-Two genes are "crossed-overed" having each gene of the first parent, the second parent or the average.
-Technically the *-operator (__mul__ in python) was used. 
+Two genes are "crossed-overed" having each gene of either the first parent, the second parent or the average of both.
+Technically the *-operator (__mul__ in python) was overloaded for this. 
 
 Mutate
 ------
-Not every gen is mutated. Some are unouched, some are complete new and some are bionmial distributed around the old value. All values of all genes are allways between 0.0 and 1.0
+Not every gen is mutated. Some are untouched, some are complete new and some are bionmial distributed around the old value. All values of all genes are allways between 0.0 and 1.0
 
 New genes
 ---------
