@@ -61,7 +61,7 @@ class Model:
 	def mutateSome(self, anzahlBehalten, anzahl):
 		print("Mutiere " , anzahl , " Gene")
 		for i in range(anzahl):
-			randomPosition = rd.randint(1, anzahlBehalten*(anzahlBehalten+1)/2)
+			randomPosition = rd.randint(1, (int)(anzahlBehalten*(anzahlBehalten+1)/2))
 			## enforce lower indices to be mutated more the higer positions
 			modifiedPosition = round(math.sqrt(1+8*(randomPosition-1))/2)-1
 			modifiedPosition = anzahlBehalten - modifiedPosition
