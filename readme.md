@@ -13,7 +13,11 @@ This algorithm tries to approximate some measured points with a saturation funct
 
 ... and parabolas.
 
+<<<<<<< HEAD
 ![ScreenshotParabola](https://github.com/pheek/genetischerAlgorithmus/blob/main/ScreenshotParabel.png)
+=======
+![ScreenshotParabola](![ScreenshotParabel](https://github.com/pheek/genetischerAlgorithmus/blob/main/ScreenshotParabel.png)
+>>>>>>> parent of 6977452 (md syntax error)
 
 
 
